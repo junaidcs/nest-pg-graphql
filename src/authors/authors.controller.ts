@@ -1,24 +1,37 @@
-import { Controller, Get, Post, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Put, Body } from '@nestjs/common';
+
+import { AuthorsService } from './authors.service'
+import { Author } from './interfaces/author.interface'
+
 
 @Controller('authors')
 export class AuthorsController {
+
+    constructor(private readonly authorService: AuthorsService){}
+
+
     @Get()
-    getAuthors(): string {
-        return 'All authors list';
+    findAll(): Author[] {
+        return this.authorService.findAll();
+    }
+
+    @Get(':id')
+    findOne(@Param('id') id: string): string {
+        return `All author record by id ${id}`;
     }
 
     @Post()
-    createAuthor(): string {
+    create(): string {
         return 'This route will create author record'
     }
 
-    @Patch()
-    setAuthor(): string {
+    @Put(':id')
+    update(@Param('id') id: string, @Body() payload): string {
         return 'This will update fields in author record'
     }
 
     @Delete()
-    deleteAuthor(): string {
+    delete(): string {
         return 'This will delete author'
     }
 }
