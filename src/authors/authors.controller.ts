@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Delete, Param, Put, Body } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Param, Put, Body, ParseIntPipe } from '@nestjs/common';
 
 import { AuthorsService } from './authors.service'
 import { Author } from './interfaces/author.interface'
+import { CreateAuthorInput } from './inputs/create-author.input';
+import { AuthorDTO } from './dto/author.dto';
 
 
 @Controller('authors')
@@ -16,13 +18,13 @@ export class AuthorsController {
     }
 
     @Get(':id')
-    findOne(@Param('id') id: string): string {
+    findOne(@Param('id', ParseIntPipe) id: number): string {
         return `All author record by id ${id}`;
     }
 
     @Post()
-    create(): string {
-        return 'This route will create author record'
+    create(@Body() payload: CreateAuthorInput): AuthorDTO {
+        return this.authorService.create(payload)
     }
 
     @Put(':id')
