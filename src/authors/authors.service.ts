@@ -8,11 +8,13 @@ import { AuthorDTO } from './dto/author.dto';
 export class AuthorsService {
   private readonly authors: Author[] = [
     {
+      id: 12345,
       age: 33,
       name: 'Author 1',
       rating: 4.5,
     },
     {
+      id: 23456,
       age: 23,
       name: 'Box ready',
       rating: 3.9,
@@ -29,6 +31,20 @@ export class AuthorsService {
       ...payload,
     };
     this.authors.push(author);
+    return author;
+  }
+
+  update(authorId: number, payload: CreateAuthorInput): AuthorDTO {
+    const index: number = this.authors.findIndex(({ id }) => id === authorId);
+    const author: Author = {
+      ...this.authors[index],
+      ...payload,
+    };
+
+    this.authors[index] = {
+      ...author,
+    };
+
     return author;
   }
 }
