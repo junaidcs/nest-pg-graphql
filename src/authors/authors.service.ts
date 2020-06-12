@@ -16,13 +16,17 @@ export class AuthorsService {
     {
       id: 23456,
       age: 23,
-      name: 'Box ready',
+      name: 'Box ready 2',
       rating: 3.9,
     },
   ];
 
   findAll(): Author[] {
     return this.authors;
+  }
+
+  findById(_id: number): Author {
+    return this.authors.find(({ id }) => id === _id);
   }
 
   create(payload: CreateAuthorInput): AuthorDTO {
