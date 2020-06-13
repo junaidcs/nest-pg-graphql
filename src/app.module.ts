@@ -18,7 +18,7 @@ import { join } from 'path';
       tracing: true,
       typePaths: ['./src/**/*.graphql'],
       definitions: {
-        path: join(process.cwd(), 'src/graphql.schema.ts'),
+        path: join(process.cwd(), 'src/graphql.ts'),
         outputAs: 'class',
       },
     }),
