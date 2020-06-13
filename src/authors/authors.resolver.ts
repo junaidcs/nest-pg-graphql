@@ -14,6 +14,8 @@ export class AuthorsResolver {
 
   @Query('authors')
   getAllAuthors(): Author[] {
-    return this.authorsService.findAll();
+    const authors = this.authorsService.findAll();
+    console.log('authors: ', authors)
+    return authors
   }
 }
