@@ -1,4 +1,4 @@
-import { Resolver, Args, Query } from '@nestjs/graphql';
+import { Resolver, Args, Query, ResolveField, Parent } from '@nestjs/graphql';
 
 import { AuthorsService } from './authors.service';
 import { Author } from './interfaces/author.interface';
@@ -17,5 +17,11 @@ export class AuthorsResolver {
     const authors = this.authorsService.findAll();
     console.log('authors: ', authors)
     return authors
+  }
+
+  @ResolveField()
+  async createAuthor(@Parent() author) {
+    const { id } = author;
+    return this.authorsService.findAll();
   }
 }
