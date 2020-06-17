@@ -24,4 +24,10 @@ export class AuthorsResolver {
     const { id } = author;
     return this.authorsService.findAll();
   }
+
+  @ResolveField()
+  async updateAuthor(@Args('id') id: number, @Parent() author) {
+    const { id } = author;
+    return this.authorsService.update(id, author);
+  }
 }
